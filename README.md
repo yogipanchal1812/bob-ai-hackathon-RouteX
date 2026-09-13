@@ -1,6 +1,6 @@
-# 🚀 [Your Project Title Here]
+# 🚀 ChainGuard AI
 
-> ⚠️ **Replace everything in `[ ]` brackets with your actual content before submission.**
+> AI-powered supply chain disruption management and fleet optimization copilot.
 
 ---
 
@@ -8,10 +8,10 @@
 
 | Field | Value |
 |---|---|
-| **Team Name** | [Your Team Name] |
-| **Track** | [AI / DevOps / Sustainability / Open] |
-| **Team Lead** | [Name] — [email@ibm.com] |
-| **Members** | [Name 1], [Name 2], [Name 3] |
+| **Team Name** | RouteX |
+| **Track** | AI — L2: Supply Chain Disruption Assistant & Fleet Utilisation Optimizer |
+| **Team Lead** | Yogi — [email@ibm.com] |
+| **Members** | Prapti, Tirth, Ridhhi |
 
 ---
 
@@ -19,7 +19,7 @@
 
 > In 2–3 sentences: What problem does your project solve? Who experiences this problem?
 
-[Describe the real-world problem your project addresses. Be specific about who the user is and what pain point they face.]
+Supply chain managers face constant operational uncertainty when unexpected disruptions, such as severe weather, port congestion, or route closures, strike active transportation networks. Without unified real-time visibility, identifying affected shipments and quantifying the associated delay and financial risks becomes slow and complex. Consequently, operations teams struggle to make rapid, optimal decisions regarding alternative route selection, carrier reallocation, and fleet utilization to mitigate costly bottlenecks.
 
 ---
 
@@ -27,17 +27,18 @@
 
 > In 2–3 sentences: What did you build? How does it solve the problem above?
 
-[Describe your solution clearly. Explain the core mechanism — what makes it work.]
+ChainGuard AI is an intelligent disruption assistant and fleet utilization optimizer designed to streamline operational response. The platform analyzes disruption data alongside active shipment schedules, route corridors, carrier metrics, and vehicle capacity to identify impacted cargo and evaluate risk severity. By delivering actionable rerouting recommendations and supporting what-if scenario simulations, ChainGuard AI empowers logistics coordinators to optimize fleet resources and execute timely mitigation plans.
+
 
 ---
 
 ## ✨ Key Features
 
-- **Feature 1:** [Brief description — e.g., "Real-time anomaly detection using watsonx.ai"]
-- **Feature 2:** [Brief description]
-- **Feature 3:** [Brief description]
-- **Feature 4:** [Optional]
-- **Feature 5:** [Optional]
+- **Feature 1** Correlates active disruptions against transit routes to identify affected freight and quantify projected delivery delays.
+- **Feature 2** Evaluates operational risk scores for active shipments based on disruption severity, carrier performance, and timeline urgency.
+- **Feature 3** Generates actionable rerouting and carrier reallocation suggestions to circumvent transit bottlenecks and maintain delivery SLAs.
+- **Feature 4** Enables operators to simulate disruption parameters and test contingency routing strategies before committing operational changes.
+- **Feature 5** Analyzes vehicle capacity and carrier availability to balance freight loads and optimize fleet resource distribution.
 
 ---
 
@@ -45,11 +46,11 @@
 
 | Category | Technologies |
 |---|---|
-| **Languages** | [e.g., Python, TypeScript] |
-| **Frameworks** | [e.g., FastAPI, React] |
-| **IBM Technologies** | [e.g., watsonx.ai, IBM Bob, IBM Cloud] |
-| **Databases** | [e.g., PostgreSQL, Redis] |
-| **Other** | [e.g., Docker, GitHub Actions] |
+| **Languages** | Python |
+| **Frameworks** | FastAPI |
+| **IBM Technologies** | None currently integrated |
+| **Databases** | PostgreSQL |
+| **Other** | Docker, Git, GitHub Actions |
 
 ---
 
@@ -77,18 +78,22 @@
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/[your-repo].git
-cd [your-repo]
+git clone https://github.com/yogipanchal1812/bob-ai-hackathon-RouteX.git
+cd bob-ai-hackathon-RouteX
 
 # 2. Install dependencies
-[your install command here]
+python -m venv .venv
+# Activate environment:
+# Windows: .venv\Scripts\activate
+# Linux/macOS: source .venv/bin/activate
+pip install -r requirements.txt
 
 # 3. Configure environment
-cp .env.example .env
-# Edit .env with your values
+cp src/.env.example src/.env
+# Edit src/.env with your values
 
 # 4. Run the project
-[your run command here]
+uvicorn src.main:app --reload --port 8000
 ```
 
 ---
@@ -108,14 +113,14 @@ cp .env.example .env
 
 > Be honest — judges appreciate transparency over overclaiming.
 
-- [Limitation 1: e.g., "Authentication is mocked — not production-ready"]
-- [Limitation 2: e.g., "Only tested on Chrome"]
-- [Limitation 3: e.g., "Feature X is scaffolded but not fully implemented"]
+- **Simulated Disruption Scenarios:** Disruption events and corridor bottlenecks are currently evaluated using curated simulation datasets rather than live global telematics and IoT streaming feeds.
+- **Limited Carrier & Fleet Telematics:** Fleet capacity and carrier metrics are modeled using representative benchmark data rather than direct enterprise ERP/TMS integrations.
+- **Local Prototype Scope:** The application is configured and verified for local development execution, with containerized multi-tenant cloud deployment planned for future releases.
 
 ---
 
 ## 🏅 What We're Most Proud Of
 
-[Tell the judges what part of your submission is strongest and worth paying close attention to.]
+We are most proud of designing ChainGuard AI to address an urgent, high-friction operational challenge in supply chain management: translating complex, unstructured disruption events into immediate, actionable operational decisions. Rather than presenting static alerts or dashboards, ChainGuard AI bridges data analytics with AI-assisted decision support, enabling logistics operators to swiftly identify affected shipments, simulate what-if rerouting scenarios, and reallocate fleet capacity in minutes. By focusing on practical decision support tailored directly for real-world supply chain coordinators, RouteX delivers a functional solution that transforms reactive firefighting into proactive disruption response.
 
 ---
