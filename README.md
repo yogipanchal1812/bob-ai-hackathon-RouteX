@@ -34,11 +34,11 @@ ChainGuard AI is an intelligent disruption assistant and fleet utilization optim
 
 ## ✨ Key Features
 
-- **Feature 1** Correlates active disruptions against transit routes to identify affected freight and quantify projected delivery delays.
-- **Feature 2** Evaluates operational risk scores for active shipments based on disruption severity, carrier performance, and timeline urgency.
-- **Feature 3** Generates actionable rerouting and carrier reallocation suggestions to circumvent transit bottlenecks and maintain delivery SLAs.
-- **Feature 4** Enables operators to simulate disruption parameters and test contingency routing strategies before committing operational changes.
-- **Feature 5** Analyzes vehicle capacity and carrier availability to balance freight loads and optimize fleet resource distribution.
+- **Disruption Impact Analysis:** Correlates active disruptions against transit routes to identify affected freight and quantify projected delivery delays.
+- **Shipment Risk Assessment:** Evaluates operational risk scores for active shipments based on disruption severity, carrier performance, and timeline urgency.
+- **AI-Driven Recommendations:** Generates actionable rerouting and carrier reallocation suggestions to circumvent transit bottlenecks and maintain delivery SLAs.
+- **What-If Scenario Simulation:** Enables operators to simulate disruption parameters and test contingency routing strategies before committing operational changes.
+- **Fleet Utilization Optimization:** Analyzes vehicle capacity and carrier availability to balance freight loads and optimize fleet resource distribution.
 
 ---
 
