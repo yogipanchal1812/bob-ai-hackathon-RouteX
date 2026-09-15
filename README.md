@@ -46,18 +46,20 @@ ChainGuard AI is an intelligent disruption assistant and fleet utilization optim
 
 | Category | Technologies |
 |---|---|
-| **Languages** | Python |
-| **Frameworks** | FastAPI |
-| **IBM Technologies** | None currently integrated |
-| **Databases** | PostgreSQL |
-| **Other** | Docker, Git, GitHub Actions |
+| **Languages** | Python, JavaScript (ES6+) |
+| **Frameworks** | FastAPI, React 18, Vite |
+| **IBM Technologies** | watsonx.ai (in progress) |
+| **Databases** | In-Memory / CSV Data Store |
+| **Other** | Recharts, Docker, Git, GitHub Actions |
 
 ---
 
 ## 📁 Repository Structure
 
 ```
-├── src/                  # All source code
+├── src/
+│   ├── backend/          # FastAPI Disruption & Risk Intelligence Engine
+│   └── frontend/         # React + Vite Operations Dashboard
 ├── docs/                 # Written documentation
 │   ├── problem-statement.md
 │   ├── solution-overview.md
@@ -74,27 +76,48 @@ ChainGuard AI is an intelligent disruption assistant and fleet utilization optim
 
 ## ⚡ How to Run
 
-> **Copy these exact steps from your [`docs/setup-guide.md`](docs/setup-guide.md)**
-
+### 1. Clone the repository
 ```bash
-# 1. Clone the repo
 git clone https://github.com/yogipanchal1812/bob-ai-hackathon-RouteX.git
 cd bob-ai-hackathon-RouteX
+```
 
-# 2. Install dependencies
+### 2. Backend Setup & Run (Member 1)
+```bash
+cd src/backend
+
+# Create and activate virtual environment
 python -m venv .venv
-# Activate environment:
-# Windows: .venv\Scripts\activate
-# Linux/macOS: source .venv/bin/activate
+# Windows:
+.venv\Scripts\activate
+# Linux/macOS:
+source .venv/bin/activate
+
+# Install dependencies
 pip install -r requirements.txt
 
-# 3. Configure environment
-cp src/.env.example src/.env
-# Edit src/.env with your values
+# Run automated test suite (41 tests)
+pytest tests/ -v
 
-# 4. Run the project
-uvicorn src.main:app --reload --port 8000
+# Start FastAPI backend server (http://localhost:8000)
+uvicorn app.main:app --reload --port 8000
 ```
+
+### 3. Frontend Setup & Run (Member 2)
+In a new terminal window:
+```bash
+cd src/frontend
+
+# Install dependencies
+npm install
+
+# Start Vite development server (http://localhost:5173)
+npm run dev
+```
+
+The application will be accessible at:
+* **Frontend UI:** `http://localhost:5173`
+* **Backend API & Swagger Docs:** `http://localhost:8000/docs`
 
 ---
 
