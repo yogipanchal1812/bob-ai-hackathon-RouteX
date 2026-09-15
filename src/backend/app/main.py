@@ -57,6 +57,18 @@ app.include_router(disruptions.router)
 app.include_router(routes.router)
 app.include_router(impact.router)
 
+# Member 3: AI Copilot & Recommendations
+try:
+    import sys
+    from pathlib import Path
+    _src_root = Path(__file__).resolve().parent.parent.parent
+    if str(_src_root) not in sys.path:
+        sys.path.insert(0, str(_src_root))
+    from ai.router import router as ai_router
+    app.include_router(ai_router)
+except Exception:
+    pass
+
 
 # ── Health check ──────────────────────────────────────────────────────────────
 
