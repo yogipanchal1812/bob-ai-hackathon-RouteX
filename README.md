@@ -127,8 +127,27 @@ The application will be accessible at:
 |---|---|
 | 📹 Demo Video | [See demo/demo-video-link.txt](demo/demo-video-link.txt) |
 | 🌐 Live Demo | [See demo/live-demo-url.txt](demo/live-demo-url.txt) |
-| 🖼️ Screenshots | [See demo/screenshots/](demo/screenshots/) |
+| 🖼️ Screenshots | [See below](#screenshots) |
 | 📊 Presentation | [See presentation/slides.pdf](presentation/) |
+
+---
+
+## 🖼️ Screenshots
+
+**Dashboard — Overview**
+![Dashboard Overview](demo/screenshots/01-dashboard.png)
+
+**Disruption Analysis**
+![Disruption Analysis](demo/screenshots/02-disruption-analysis.png)
+
+**Shipment Risk Assessment**
+![Risk Assessment](demo/screenshots/03-risk-assessment.png)
+
+**AI-Driven Recommendations**
+![Recommendations](demo/screenshots/04-recommendations.png)
+
+**Fleet Utilization Optimization**
+![Fleet Optimization](demo/screenshots/05-fleet-optimization.png)
 
 ---
 
