@@ -1,0 +1,9 @@
+route_id,origin,destination,via,distance_km,estimated_days,estimated_cost,status
+R001,Shanghai,Rotterdam,Strait of Malacca; Suez Canal,19500,28,42000,ACTIVE
+R002,Shenzhen,Los Angeles,Pacific Ocean,11600,16,28000,ACTIVE
+R003,Mumbai,Hamburg,Suez Canal; Mediterranean Sea,12800,22,35000,ACTIVE
+R004,Singapore,New York,Panama Canal; Caribbean Sea,18200,26,48000,ACTIVE
+R005,Tokyo,Seattle,North Pacific Ocean,7700,12,22000,ACTIVE
+R006,Ho Chi Minh City,Felixstowe,Strait of Malacca; Suez Canal,17400,30,39000,ACTIVE
+R007,Busan,Long Beach,Pacific Ocean,10100,14,25000,ACTIVE
+R008,Colombo,Antwerp,Suez Canal; Mediterranean Sea,14200,24,37000,ACTIVE

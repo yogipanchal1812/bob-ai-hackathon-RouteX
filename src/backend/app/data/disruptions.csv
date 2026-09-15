@@ -1,0 +1,9 @@
+disruption_id,location,type,severity,duration_days,description,status
+D001,Suez Canal,PORT_CONGESTION,CRITICAL,14,Severe vessel backlog causing multi-week transit delays through the Suez Canal corridor,ACTIVE
+D002,Strait of Malacca,WEATHER,HIGH,7,Tropical cyclone generating hazardous sea conditions across the Strait of Malacca,ACTIVE
+D003,Panama Canal,INFRASTRUCTURE,MEDIUM,10,Scheduled lock maintenance reducing daily transit capacity at the Panama Canal,ACTIVE
+D004,North Pacific,WEATHER,LOW,3,Moderate storm system producing rough seas in the North Pacific shipping lanes,ACTIVE
+D005,Mediterranean,GEOPOLITICAL,HIGH,21,Regional security restrictions affecting commercial vessel transit through the Eastern Mediterranean,ACTIVE
+D006,Shanghai,PORT_CONGESTION,MEDIUM,5,Elevated container dwell times at Shanghai port due to increased inspection protocols,MONITORING
+D007,Los Angeles,LABOR_STRIKE,HIGH,12,Dockworker labor action disrupting cargo handling operations at the Port of Los Angeles,ACTIVE
+D008,Singapore,INFRASTRUCTURE,LOW,4,Minor berth rehabilitation work at Singapore terminal with limited throughput reduction,RESOLVED

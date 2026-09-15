@@ -1,0 +1,6 @@
+carrier_id,name,capacity,reliability_score,status
+C001,GlobalShip Logistics,15000,0.92,ACTIVE
+C002,OceanBridge Freight,12000,0.85,ACTIVE
+C003,TransSea Carriers,18000,0.78,ACTIVE
+C004,PacificLine Shipping,10000,0.88,ACTIVE
+C005,HarborLink Transport,8000,0.72,ACTIVE
