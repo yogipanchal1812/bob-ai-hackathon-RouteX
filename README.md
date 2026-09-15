@@ -10,7 +10,7 @@
 |---|---|
 | **Team Name** | RouteX |
 | **Track** | AI — L2: Supply Chain Disruption Assistant & Fleet Utilisation Optimizer |
-| **Team Lead** | Yogi — [email@ibm.com] |
+| **Team Lead** | Yogi — 24dce082@charusat.edu.in |
 | **Members** | Prapti, Tirth, Ridhhi |
 
 ---
