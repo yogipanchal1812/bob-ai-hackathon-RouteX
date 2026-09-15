@@ -1,62 +1,48 @@
 /**
- * RouteX Frontend — Fleet page.
- *
+ * RouteX — Fleet Operations dashboard.
  * Consumes: GET /api/fleet (Member 4 — may not yet be available)
- * Creates a clean API service interface expecting the agreed contract.
- * Does NOT implement fleet backend logic.
  */
 
 import React from 'react'
+import { Ship, AlertCircle, RefreshCw } from 'lucide-react'
 
 import { useApi } from '../hooks/useApi.js'
 import { fetchFleet } from '../services/api.js'
 import {
-  LoadingState, ErrorState, EmptyState, SectionCard, AlertBanner,
-  StatusBadge, PageHeader,
+  SkeletonKpiCard, ErrorState, EmptyState, SectionCard, AlertBanner, StatusBadge,
 } from '../components/common/index.jsx'
 
-// ── Expected fleet contract (for documentation / graceful empty state) ─────────
-// GET /api/fleet → { success: true, count: N, data: [{ vehicle_id, carrier_id, ... }] }
+function FleetKpi({ label, value, variant, loading }) {
+  if (loading) return <SkeletonKpiCard />
+  return (
+    <div className={`kpi-card${variant ? ` kpi-${variant}` : ''}`}>
+      <div className="kpi-label">{label}</div>
+      <div className="kpi-value">{value ?? '—'}</div>
+    </div>
+  )
+}
 
 function FleetCard({ vehicle }) {
+  const statusColor = {
+    AVAILABLE: 'var(--risk-low)', IN_TRANSIT: 'var(--status-transit)',
+    IDLE: 'var(--text-muted)', MAINTENANCE: 'var(--risk-medium)',
+  }[vehicle.status] || 'var(--text-muted)'
+
   return (
-    <div className="card" style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <span className="text-mono" style={{ fontWeight: 700, fontSize: 'var(--text-base)' }}>
+    <div className="card" style={{ borderLeft: `3px solid ${statusColor}` }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
+        <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 700, fontSize: 'var(--text-base)', color: 'var(--text-bright)' }}>
           {vehicle.vehicle_id}
         </span>
         {vehicle.status && <StatusBadge status={vehicle.status} />}
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-2)', fontSize: 'var(--text-sm)' }}>
-        {vehicle.carrier_id && (
-          <div>
-            <span className="text-secondary">Carrier: </span>
-            <span className="text-mono">{vehicle.carrier_id}</span>
-          </div>
-        )}
-        {vehicle.type && (
-          <div>
-            <span className="text-secondary">Type: </span>
-            <span>{vehicle.type}</span>
-          </div>
-        )}
-        {vehicle.capacity != null && (
-          <div>
-            <span className="text-secondary">Capacity: </span>
-            <span>{vehicle.capacity}</span>
-          </div>
-        )}
-        {vehicle.utilization != null && (
-          <div>
-            <span className="text-secondary">Utilization: </span>
-            <span style={{ fontWeight: 600 }}>{vehicle.utilization}%</span>
-          </div>
-        )}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-2)', fontSize: 'var(--text-xs)', color: 'var(--text-secondary)' }}>
+        {vehicle.carrier_id && <span>Carrier: <span style={{ color: 'var(--text-primary)', fontFamily: 'var(--font-mono)' }}>{vehicle.carrier_id}</span></span>}
+        {vehicle.type && <span>Type: <span style={{ color: 'var(--text-primary)' }}>{vehicle.type}</span></span>}
+        {vehicle.capacity != null && <span>Capacity: <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{vehicle.capacity}</span></span>}
+        {vehicle.utilization != null && <span>Utilization: <span style={{ color: vehicle.utilization > 80 ? 'var(--risk-high)' : 'var(--risk-low)', fontWeight: 700 }}>{vehicle.utilization}%</span></span>}
         {vehicle.current_location && (
-          <div style={{ gridColumn: '1 / -1' }}>
-            <span className="text-secondary">Location: </span>
-            <span>{vehicle.current_location}</span>
-          </div>
+          <span style={{ gridColumn: '1 / -1' }}>Location: <span style={{ color: 'var(--text-primary)' }}>{vehicle.current_location}</span></span>
         )}
       </div>
     </div>
@@ -67,58 +53,67 @@ export default function Fleet() {
   const { data, loading, error, refetch } = useApi(() => fetchFleet())
   const fleet = data?.data || []
 
+  // Compute KPIs from actual fleet data
+  const available    = fleet.filter(v => v.status === 'AVAILABLE').length
+  const inTransit    = fleet.filter(v => v.status === 'IN_TRANSIT').length
+  const idle         = fleet.filter(v => v.status === 'IDLE').length
+  const maintenance  = fleet.filter(v => v.status === 'MAINTENANCE').length
+  const avgUtil      = fleet.length
+    ? Math.round(fleet.filter(v => v.utilization != null).reduce((acc, v) => acc + v.utilization, 0) / (fleet.filter(v => v.utilization != null).length || 1))
+    : null
+
+  const isEndpointMissing = error?.status === 404 || error?.status === 405
+
   return (
     <div>
-      <PageHeader
-        title="Fleet"
-        subtitle="Vehicle capacity and carrier availability overview"
-        actions={
+      {/* KPIs */}
+      <div className="kpi-grid">
+        <FleetKpi label="Total Fleet" value={fleet.length || '—'} variant="blue" loading={loading} />
+        <FleetKpi label="Available" value={fleet.length ? available : '—'} variant="ok" loading={loading} />
+        <FleetKpi label="In Transit" value={fleet.length ? inTransit : '—'} variant="blue" loading={loading} />
+        <FleetKpi label="Idle" value={fleet.length ? idle : '—'} loading={loading} />
+        <FleetKpi label="Avg Utilization" value={avgUtil != null ? `${avgUtil}%` : '—'} variant={avgUtil > 80 ? 'high' : 'ok'} loading={loading} />
+      </div>
+
+      {/* Fleet body */}
+      <SectionCard
+        title={fleet.length ? `Fleet (${fleet.length} vehicles)` : 'Fleet'}
+        headerExtra={
           <button className="btn btn-secondary btn-sm" onClick={refetch} disabled={loading}>
-            {loading ? 'Loading…' : '↻ Refresh'}
+            <RefreshCw size={12} /> {loading ? 'Loading…' : 'Refresh'}
           </button>
         }
-      />
-
-      {/* Availability notice */}
-      {!loading && error && (
-        <AlertBanner type="warning">
-          <strong>Fleet endpoint not yet available.</strong> The fleet API (GET /api/fleet) is provided by Member 4.
-          This interface is ready and will display fleet data as soon as the endpoint is live.
-        </AlertBanner>
-      )}
-
-      <SectionCard>
+      >
         {loading ? (
-          <LoadingState message="Loading fleet data…" />
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 'var(--space-4)' }}>
+            {Array(6).fill(0).map((_, i) => <SkeletonKpiCard key={i} />)}
+          </div>
         ) : error ? (
-          <div>
+          <>
+            {isEndpointMissing && (
+              <AlertBanner type="warning">
+                <strong>Fleet endpoint not yet available.</strong> GET /api/fleet is provided by Member 4.
+                This interface is ready and will display fleet data as soon as the endpoint is live.
+              </AlertBanner>
+            )}
             <EmptyState
               title="Fleet data unavailable"
-              message={
-                error.status === 404
-                  ? 'The /api/fleet endpoint has not been implemented yet. This UI is ready to consume it.'
-                  : error.message || 'Unable to connect to the fleet service.'
-              }
-              icon="🚢"
-            />
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: 'var(--space-4)' }}>
-              <button className="btn btn-secondary btn-sm" onClick={refetch}>
+              message={isEndpointMissing
+                ? 'The /api/fleet endpoint has not been implemented yet.'
+                : error.message || 'Unable to connect to the fleet service.'}
+            >
+              <button className="btn btn-secondary btn-sm" onClick={refetch} style={{ marginTop: 'var(--space-3)' }}>
                 Retry
               </button>
-            </div>
-          </div>
+            </EmptyState>
+          </>
         ) : fleet.length === 0 ? (
-          <EmptyState title="No fleet data" message="No vehicles are currently registered." icon="🚢" />
+          <EmptyState title="No fleet data" message="No vehicles are currently registered." />
         ) : (
-          <div>
-            <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-secondary)', marginBottom: 'var(--space-4)' }}>
-              {fleet.length} vehicle{fleet.length !== 1 ? 's' : ''} found
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 'var(--space-4)' }}>
-              {fleet.map((vehicle, i) => (
-                <FleetCard key={vehicle.vehicle_id || i} vehicle={vehicle} />
-              ))}
-            </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 'var(--space-4)' }}>
+            {fleet.map((vehicle, i) => (
+              <FleetCard key={vehicle.vehicle_id || i} vehicle={vehicle} />
+            ))}
           </div>
         )}
       </SectionCard>
