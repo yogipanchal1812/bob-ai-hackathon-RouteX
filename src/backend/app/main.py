@@ -69,6 +69,15 @@ try:
 except Exception:
     pass
 
+# Member 4: Fleet Optimization & What-If Simulation
+try:
+    from optimization.api.fleet_router import router as fleet_router
+    from optimization.api.simulation_router import router as simulation_router
+    app.include_router(fleet_router)
+    app.include_router(simulation_router)
+except Exception:
+    pass
+
 
 # ── Health check ──────────────────────────────────────────────────────────────
 
