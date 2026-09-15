@@ -9,51 +9,47 @@
 # =============================================================================
 
 team:
-  name: ""                             # REQUIRED — e.g., "Orion Squad"
-  track: ""                            # REQUIRED — one of: AI | DevOps | Sustainability | Open
+  name: "RouteX"
+  track: "AI"
   lead:
-    name: ""                           # REQUIRED — e.g., "Alice Chen"
-    email: ""                          # REQUIRED — e.g., "alice.chen@ibm.com"
+    name: "Yogi"
+    email: "yogipanchal179@gmail.com"
   members:
-    - name: ""                         # REQUIRED — Team member 1
-      email: ""
-    - name: ""                         # Add more members by copying the two lines above
-      email: ""
-    - name: ""
-      email: ""
+    - name: "Prapti"
+      email: "prapti@routex.ai"
+    - name: "Tirth"
+      email: "tirth@routex.ai"
+    - name: "Ridhhi"
+      email: "ridhhi@routex.ai"
 
 submission:
-  title: ""                            # REQUIRED — Project display name, e.g., "SmartOps Dashboard"
+  title: "ChainGuard AI"
 
-  problem_statement: >                 # REQUIRED — 1-3 sentences. What problem? Who has it?
-    Replace this text with a concise description of the real-world problem
-    your project addresses and who experiences it.
+  problem_statement: >
+    Supply chain managers face operational uncertainty when disruptions like severe weather, port congestion, or corridor closures hit active transit networks without unified real-time visibility. Identifying affected shipments and quantifying financial exposure is slow and complex, making rapid rerouting and fleet reallocation difficult.
 
-  solution_summary: >                  # REQUIRED — 1-3 sentences. What did you build?
-    Replace this text with a clear description of your solution
-    and how it addresses the problem above.
+  solution_summary: >
+    ChainGuard AI is an intelligent disruption assistant and fleet utilization optimizer that correlates disruption data against active shipment schedules, calculates multi-factor deterministic risk scores, provides an AI Copilot for operational queries, and delivers structured rerouting recommendations to protect delivery SLAs.
 
-  key_features:                        # REQUIRED — List 3 to 5 specific features you implemented
-    - ""                               # e.g., "Real-time pipeline anomaly detection using watsonx.ai"
-    - ""
-    - ""
-    - ""                               # optional 4th
-    - ""                               # optional 5th
+  key_features:
+    - "Disruption Impact Analysis: Correlates active corridor disruptions against transit routes to quantify delivery delays and financial exposure"
+    - "Deterministic Risk Engine: Evaluates operational risk scores (0-100) across severity, route exposure, cargo value, and carrier reliability"
+    - "AI Copilot & Decision Support: Answers natural language queries grounded in live network context with IBM Bob integration"
+    - "Actionable Operational Recommendations: Generates structured rerouting and expediting decisions with explainable confidence scoring"
+    - "What-If Scenario Simulation: Simulates duration and severity parameter deltas to evaluate contingency routing strategies"
 
   tech_stack:
-    languages: []                      # REQUIRED — e.g., ["Python", "TypeScript"]
-    frameworks: []                     # e.g., ["FastAPI", "React"]
-    ibm_technologies: []               # e.g., ["watsonx.ai", "IBM Bob", "IBM Cloud Functions"]
-    databases: []                      # e.g., ["PostgreSQL", "Redis"]
-    other: []                          # e.g., ["Docker", "GitHub Actions", "Slack API"]
+    languages: ["Python", "JavaScript"]
+    frameworks: ["FastAPI", "React", "Vite"]
+    ibm_technologies: ["watsonx.ai", "IBM Bob"]
+    databases: ["In-Memory Data Store"]
+    other: ["Docker", "GitHub Actions", "Recharts", "Pytest"]
 
-  what_we_are_most_proud_of: >         # Optional but recommended — guides judges to your best work
-    Replace with what aspect of the submission you consider strongest
-    and want judges to pay special attention to.
+  what_we_are_most_proud_of: >
+    We are most proud of designing ChainGuard AI to bridge data analytics with automated AI-assisted decision support. Rather than presenting static alerts, our platform translates complex disruption events into immediate, actionable rerouting and fleet reallocation decisions with explainable confidence and strict anti-hallucination guardrails.
 
-  known_limitations: >                 # Optional but recommended — be honest about gaps
-    Replace with any known limitations, incomplete features,
-    or shortcuts taken due to time constraints.
+  known_limitations: >
+    The current release utilizes curated demonstration datasets for global trade corridors rather than live IoT/telematics streaming feeds. Real-time carrier telematics and automated TMS write-back integrations are planned for future production phases.
 
 # =============================================================================
 # ARTIFACT LOCATIONS
@@ -63,7 +59,7 @@ artifacts:
   source_code: "src/"
   setup_guide: "docs/setup-guide.md"
   architecture_doc: "docs/architecture.md"
-  demo_video: "demo/demo-video-link.txt"   # URL to hosted video (YouTube, Loom, Box)
-  live_demo: "demo/live-demo-url.txt"      # URL to deployed demo (optional)
+  demo_video: "demo/demo-video-link.txt"
+  live_demo: "demo/live-demo-url.txt"
   screenshots: "demo/screenshots/"
   presentation: "presentation/"
